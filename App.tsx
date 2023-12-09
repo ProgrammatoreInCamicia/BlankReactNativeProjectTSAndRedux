@@ -1,33 +1,8 @@
-import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import React from 'react';
 import { Provider, useSelector, useDispatch } from 'react-redux';
-import { configureStore, createSlice } from '@reduxjs/toolkit';
-
-export interface State {
-  counter: number,
-};
-
-const initialState: State = {
-  counter: 0
-};
-
-const counterSlice = createSlice({
-  name: 'counter',
-  initialState,
-  reducers: {
-    increment: (state) => {
-      state.counter += 1
-    },
-    decrement: (state) => {
-      state.counter -= 1
-    },
-  },
-});
-
-const store = configureStore({
-  reducer: counterSlice.reducer
-});
+import store, { State } from './store/store';
+import { decrement, increment } from './store/counter.reducer';
 
 export default function App() {
   return (
@@ -49,11 +24,11 @@ function Counter() {
       <View style={styles.button}>
         <Button
           title='Increment'
-          onPress={() => dispatch(counterSlice.actions.increment())}
+          onPress={() => dispatch(increment())}
         />
         <Button
           title='Decrement'
-          onPress={() => dispatch(counterSlice.actions.decrement())}
+          onPress={() => dispatch(decrement())}
         />
       </View>
     </View>
